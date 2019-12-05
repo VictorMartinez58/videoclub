@@ -25,11 +25,21 @@
                 @endif
             </p>
 
-            @if($pelicula->rented)
-                <a class="btn btn-danger" href="#">Devolver pel&iacute;cula</a>
-            @else
-                <a class="btn btn-primary" href="#">Alquilar pel&iacute;cula</a>
-            @endif
+
+
+            <form action="{{ action('CatalogController@changeRented') }}" method="POST">
+              {{method_field('PUT')}}
+
+                 <input type="hidden" name="id" id="id" value={{ $pelicula->id }}>
+
+                @if($pelicula->rented)
+                    <button type="submit" class="btn btn-danger">Devolver pel&iacute;cula</button>
+                @else
+                    <button type="submit" class="btn btn-primary">Alquilar pel&iacute;cula</button>
+                @endif
+
+            </form>
+
             <a class="btn btn-warning" href="{{ url('/catalog/edit/' . $pelicula->id ) }}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 Editar pel&iacute;cula</a>
